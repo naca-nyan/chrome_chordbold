@@ -1,7 +1,8 @@
-chrome.storage.sync.get(['chordstyleOption', 'wordstyleOption', 'greenbackOption', 'compactOption'], function(item) {
+chrome.storage.sync.get(['chordstyleOption', 'wordstyleOption', 'greenbackOption', 'columnCount', 'compactOption'], function(item) {
   const chordstyleOption = item.chordstyleOption || 'bold';
   const wordstyleOption = item.wordstyleOption || 'normal';
   const greenbackOption = item.greenbackOption || 'disable';
+  const columnCount = item.columnCount || '1';
   const compactOption = item.compactOption || false;
   let chordfontSize, chordfontWeight, chordtop, lineHeight;
   let wordfontWeight;
@@ -92,6 +93,10 @@ chrome.storage.sync.get(['chordstyleOption', 'wordstyleOption', 'greenbackOption
 
   document.body.style.backgroundColor = background;
 
+  const styleSheet = new CSSStyleSheet();
+  styleSheet.replaceSync(`div.main div { column-count: ${columnCount}; }`);
+  document.adoptedStyleSheets = [styleSheet];
+
   if (compactOption) {
     // Wrap every `span.chord` and `span.word` pair with `span.chordword`
     document.querySelectorAll(".main .line").forEach(function(line) {
@@ -135,6 +140,6 @@ chrome.storage.sync.get(['chordstyleOption', 'wordstyleOption', 'greenbackOption
         margin-block: 0 .3em;
       }
     `);
-    document.adoptedStyleSheets = [styleSheet];
+    document.adoptedStyleSheets.push(styleSheet);
   }
 });
