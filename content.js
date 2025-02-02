@@ -1,7 +1,8 @@
-chrome.storage.sync.get(['chordstyleOption', 'wordstyleOption', 'greenbackOption'], function(item) {
+chrome.storage.sync.get(['chordstyleOption', 'wordstyleOption', 'greenbackOption', 'compactOption'], function(item) {
   const chordstyleOption = item.chordstyleOption || 'bold';
   const wordstyleOption = item.wordstyleOption || 'normal';
   const greenbackOption = item.greenbackOption || 'disable';
+  const compactOption = item.compactOption || false;
   let chordfontSize, chordfontWeight, chordtop, lineHeight;
   let wordfontWeight;
   let background;
@@ -86,4 +87,50 @@ chrome.storage.sync.get(['chordstyleOption', 'wordstyleOption', 'greenbackOption
   });
 
   document.body.style.backgroundColor = background;
+
+  if (compactOption) {
+    // Wrap every `span.chord` and `span.word` pair with `span.chordword`
+    document.querySelectorAll(".main .line").forEach(function(line) {
+      const p = document.createElement("p");
+      while (line.children.length > 0) {
+        const chord = line.children[0];
+        const word = line.children[1];
+        if (chord.classList.contains("chord") && 
+            word && word.classList.contains("word")) {
+          const span = document.createElement("span");
+          span.classList = "chordword";
+          span.appendChild(chord);
+          span.appendChild(word);
+          p.appendChild(span);
+        } else {
+          p.appendChild(chord);
+        }
+      }
+      line.innerHTML = p.innerHTML;
+    });
+    const styleSheet = new CSSStyleSheet();
+    styleSheet.replaceSync(`
+      div.main span.chordword {
+        display: inline-flex;
+        flex-direction: column;
+      }
+      div.main span.chord, div.main span.word, div.main span.wordtop {
+        position: static;
+        line-height: 1em;
+      }
+      div.main span.wordtop {
+        vertical-align: bottom;
+      }
+      div.main span.chord {
+        margin-right: 6px;
+      }
+      div.main span.word {
+        white-space: pre;
+      }
+      div.main p.line {
+        margin-block: 0 .3em;
+      }
+    `);
+    document.adoptedStyleSheets = [styleSheet];
+  }
 });
