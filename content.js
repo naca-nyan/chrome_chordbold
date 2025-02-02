@@ -82,6 +82,10 @@ chrome.storage.sync.get(['chordstyleOption', 'wordstyleOption', 'greenbackOption
       word.style.fontWeight = wordfontWeight;
   });
 
+  document.querySelectorAll('span.wordtop').forEach(function(word) {
+      word.style.fontWeight = wordfontWeight;
+  });
+
   document.querySelectorAll('div.main').forEach(function(div) {
       div.style.lineHeight = lineHeight;
   });
