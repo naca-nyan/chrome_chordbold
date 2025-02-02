@@ -1,5 +1,5 @@
 // Save the options
-document.getElementById('save').addEventListener('click', function() {
+function saveOptions() {
     const chordstyleOption = document.getElementById('chordstyleOption').value;
     const wordstyleOption = document.getElementById('wordstyleOption').value;
     const greenbackOption = document.getElementById('greenbackOption').value;
@@ -8,7 +8,12 @@ document.getElementById('save').addEventListener('click', function() {
     chrome.storage.sync.set({chordstyleOption, wordstyleOption, greenbackOption, columnCount, compactOption}, function() {
         console.log('Option saved.');
     });
-});
+}
+document.getElementById('chordstyleOption').onchange = saveOptions;
+document.getElementById('wordstyleOption').onchange = saveOptions;
+document.getElementById('greenbackOption').onchange = saveOptions;
+document.getElementById('columnCount').onchange = saveOptions;
+document.getElementById('compactOption').onchange = saveOptions;
 
 // Load the saved options
 document.addEventListener('DOMContentLoaded', function() {
