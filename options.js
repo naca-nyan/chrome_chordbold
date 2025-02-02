@@ -12,9 +12,9 @@ document.getElementById('save').addEventListener('click', function() {
 // Load the saved options
 document.addEventListener('DOMContentLoaded', function() {
     chrome.storage.sync.get(['chordstyleOption', 'wordstyleOption', 'greenbackOption', 'compactOption'], function(item) {
-        document.getElementById('chordstyleOption').value = item.styleOption || 'bold';
-        document.getElementById('wordstyleOption').value = item.styleOption || 'normal';
-        document.getElementById('greenbackOption').value = item.styleOption || 'disable';
+        document.getElementById('chordstyleOption').value = item.chordstyleOption || 'bold';
+        document.getElementById('wordstyleOption').value = item.wordstyleOption || 'normal';
+        document.getElementById('greenbackOption').value = item.greenbackOption || 'disable';
         document.getElementById('compactOption').checked = item.compactOption || false;
     });
 });
