@@ -1,0 +1,49 @@
+
+body {
+  min-width: 240px;
+}
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header img {
+  width: 28px;
+  height: 28px;
+  margin-right: 10px;
+  border-radius: 20%;
+}
+fieldset div.radiogroup {
+  display: flex;
+}
+fieldset div.radiogroup img {
+  width: 40px;
+}
+fieldset div.radiogroup label {
+  margin: 3px;
+  padding: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20%;
+  width: 64px;
+  height: 64px;
+  font-size: 8px;
+  cursor: pointer;
+}
+fieldset input[type="radio"] {
+  display: none;
+}
+fieldset input[type="radio"] + label {
+  opacity: 0.4;
+}
+fieldset input[type="radio"]:checked + label {
+  opacity: 1;
+  background-color: #f3f3f3;
+}
+label {
+  display: inline-block;
+  width: 40%;
+  text-align: right;
+}

@@ -2,54 +2,69 @@
 <html>
 <head>
     <title>ChordWiki Style Options</title>
-    <style>
-        body {
-            min-width: 240px;
-        }
-    </style>
+    <link rel="stylesheet" href="options.css">
 </head>
 <body>
-    <h2>ChordWiki Style Options</h2>
-    <div>
-        <label for="chordstyleOption">Chord Style Option:</label>
-        <select id="chordstyleOption">
-            <option value="normal">Normal</option>
-            <option value="bold">Bold</option>
-            <option value="bold-large">Bold-Large</option>
-            <option value="bold-verylarge">Bold-VeryLarge</option>
-            <option value="jazz">Jazz</option>
-            <option value="jazz-large">Jazz-Large</option>
-            <option value="jazz-verylarge">Jazz-VeryLarge</option>
-        </select>
-    </div>
-    <div>
-        <label for="wordstyleOption">Word Style Option:</label>
-        <select id="wordstyleOption">
-            <option value="normal">Normal</option>
-            <option value="bold">Bold</option>
-        </select>
-    </div>
-    <div>
-        <label for="greenbackOption">Green Back:</label>
-        <select id="greenbackOption">
-            <option value="disable">Disable</option>
-            <option value="enable">Enable</option>
-        </select>
-    </div>
-    <div>
-        <label for="columnCount">Column count:</label>
-        <select id="columnCount">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-    </div>
-    <div>
-        <label for="compactOption">Compact mode:</label>
-        <input type="checkbox" id="compactOption" />
-    </div>
+    <header>
+        <img alt="logo" src="./icon.png" />
+        <h2>ChordWiki Style</h2>
+    </header>
+    <fieldset>
+        <legend>Chord Style</legend>
+        <div class="radiogroup">
+            <input type="radio" name="chordstyleOption" value="normal" id="chord-normal"/>
+            <label for="chord-normal"><img src="images/chord-normal.png"/>Normal</label>
+        </div>
+        <div class="radiogroup">
+            <input type="radio" name="chordstyleOption" value="bold" id="chord-bold" checked/>
+            <label for="chord-bold"><img src="images/chord-bold.png"/>Bold</label>
+            <input type="radio" name="chordstyleOption" value="bold-large" id="chord-bold-large" />
+            <label for="chord-bold-large"><img src="images/chord-boldlarge.png"/>Bold Large</label>
+            <input type="radio" name="chordstyleOption" value="bold-verylarge" id="chord-bold-verylarge" />
+            <label for="chord-bold-verylarge"><img src="images/chord-boldverylarge.png"/>Bold Very Large</label>
+        </div>
+        <div class="radiogroup">
+            <input type="radio" name="chordstyleOption" value="jazz" id="chord-jazz" />
+            <label for="chord-jazz"><img src="images/chord-jazz.png"/>Jazz</label>
+            <input type="radio" name="chordstyleOption" value="jazz-large" id="chord-jazz-large"/>
+            <label for="chord-jazz-large"><img src="images/chord-jazzlarge.png"/>Jazz Large</label>
+            <input type="radio" name="chordstyleOption" value="jazz-verylarge" id="chord-jazz-verylarge"/>
+            <label for="chord-jazz-verylarge"><img src="images/chord-jazzverylarge.png"/>Jazz Very Large</label>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Word Style</legend>
+        <div class="radiogroup">
+            <input type="radio" name="wordstyleOption" value="normal" id="word-normal" checked />
+            <label for="word-normal"><img src="images/word-normal.png"/>Normal</label>
+            <input type="radio" name="wordstyleOption" value="bold" id="word-bold" />
+            <label for="word-bold"><img src="images/word-bold.png"/>Bold</label>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Misc.</legend>
+        <div>
+            <label for="greenbackOption">Green Back:</label>
+            <select id="greenbackOption">
+                <option value="disable">Disable</option>
+                <option value="enable">Enable</option>
+            </select>
+        </div>
+        <div>
+            <label for="columnCount">Column count:</label>
+            <select id="columnCount">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div>
+            <label for="compactOption">Compact mode:</label>
+            <input type="checkbox" id="compactOption" />
+        </div>
+    </fieldset>
     <script src="options.js"></script>
 </body>
 </html>
