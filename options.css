@@ -1,0 +1,55 @@
+body {
+  min-width: 240px;
+}
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header img {
+  width: 28px;
+  height: 28px;
+  margin-right: 10px;
+  border-radius: 20%;
+}
+.toggle-box-wrapper {
+  display: flex;
+}
+.toggle-box-wrapper img {
+  padding-bottom: 4px;
+}
+.toggle-box-wrapper label {
+  margin: 1px;
+  padding: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15%;
+  width: 70px;
+  height: 60px;
+  font-size: 9px;
+  color: #2e2e2e;
+  text-align: center;
+  cursor: pointer;
+}
+.toggle-box-wrapper input[type="checkbox"] {
+  display: none;
+}
+.toggle-box-wrapper input[type="checkbox"] + label {
+  opacity: 0.5;
+  user-select: none;
+  border: #ffffff00 1px solid;
+}
+.toggle-box-wrapper input[type="checkbox"]:checked + label {
+  opacity: 1;
+  background-color: #f7f7f7;
+  border: #cfcfcf 1px solid;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.text-center {
+  text-align: center;
+}
