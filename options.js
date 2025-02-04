@@ -25,7 +25,10 @@ document.getElementsByName('chordstyleOption').forEach((e) => e.onchange = saveO
 document.getElementsByName('wordstyleOption').forEach((e) => e.onchange = saveOptions);
 document.getElementsByName('compactOption').forEach((e) => e.onchange = saveOptions);
 document.getElementsByName('greenbackOption').forEach((e) => e.onchange = saveOptions);
-document.getElementById('columnCount').oninput = saveOptions;
+document.getElementById('columnCount').oninput = (e) => {
+    document.getElementById('columnCountText').innerText = e.target.value;
+    saveOptions();
+}
 
 // Load the saved options
 document.addEventListener('DOMContentLoaded', function() {
@@ -35,5 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
         setRadioValue('compactOption', item.compactOption ? 'compact' : 'normal');
         setRadioValue('greenbackOption', item.greenbackOption == 'enabled' ? 'green' : 'white');
         document.getElementById('columnCount').value = item.columnCount || '1';
+        document.getElementById('columnCountText').innerText = item.columnCount || '1';
     });
 });

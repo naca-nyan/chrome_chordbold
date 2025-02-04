@@ -50,19 +50,22 @@
             <label for="compact-compact"><img src="images/compact-compact.png"/>Compact</label>
         </div>
     </fieldset>
-    <fieldset>
-        <legend>Background</legend>
-        <div class="radiogroup">
-            <input type="radio" name="greenbackOption" id="background-white" value="white" checked />
-            <label for="background-white"><img style="background-color: white;" src="images/word-normal.png">White</label>
-            <input type="radio" name="greenbackOption" id="background-green" value="green" />
-            <label for="background-green"><img style="background-color: #00902A;" src="images/word-normal.png">Green</label>
-        </div>
-    </fieldset>
-    <fieldset>
-        <legend>Column count</legend>
-        <input type="range" id="columnCount" min="1" max="5" step="1" />
-    </fieldset>
+    <div class="flex">
+        <fieldset>
+            <legend>Background</legend>
+            <div class="radiogroup">
+                <input type="radio" name="greenbackOption" id="background-white" value="white" checked />
+                <label for="background-white"><img style="background-color: white;" src="images/word-normal.png">White</label>
+                <input type="radio" name="greenbackOption" id="background-green" value="green" />
+                <label for="background-green"><img style="background-color: #00902A;" src="images/word-normal.png">Green</label>
+            </div>
+        </fieldset>
+        <fieldset class="flex column text-center">
+            <legend>Column</legend>
+            <label for="columnCount" id="columnCountText">1</label>
+            <input type="range" id="columnCount" min="1" max="5" step="1" value="1"/>
+        </fieldset>
+    </div>
     <script src="options.js"></script>
 </body>
 </html>

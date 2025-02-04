@@ -43,8 +43,15 @@ fieldset input[type="radio"]:checked + label {
   opacity: 1;
   background-color: #f3f3f3;
 }
-label {
-  display: inline-block;
-  width: 40%;
-  text-align: right;
+.flex {
+  display: flex;
+}
+.column {
+  flex-direction: column;
+}
+.text-center {
+  text-align: center;
+}
+.flex input[type="range"] {
+  width: 50px;
 }
