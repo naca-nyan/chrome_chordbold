@@ -2,6 +2,11 @@
 <html>
 <head>
     <title>ChordWiki Style Options</title>
+    <style>
+        body {
+            min-width: 240px;
+        }
+    </style>
 </head>
 <body>
     <h2>ChordWiki Style Options</h2>
@@ -29,10 +34,19 @@
         </select>
     </div>
     <div>
+        <label for="columnCount">Column count:</label>
+        <select id="columnCount">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </div>
+    <div>
         <label for="compactOption">Compact mode:</label>
         <input type="checkbox" id="compactOption" />
     </div>
-    <button id="save">Save</button>
     <script src="options.js"></script>
 </body>
 </html>
