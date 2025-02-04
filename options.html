@@ -42,28 +42,26 @@
         </div>
     </fieldset>
     <fieldset>
-        <legend>Misc.</legend>
-        <div>
-            <label for="greenbackOption">Green Back:</label>
-            <select id="greenbackOption">
-                <option value="disable">Disable</option>
-                <option value="enable">Enable</option>
-            </select>
+        <legend>Chord Position</legend>
+        <div class="radiogroup">
+            <input type="radio" name="compactOption" id="compact-normal" value="normal" checked />
+            <label for="compact-normal"><img src="images/compact-normal.png"/>Normal</label>
+            <input type="radio" name="compactOption" id="compact-compact" value="compact" />
+            <label for="compact-compact"><img src="images/compact-compact.png"/>Compact</label>
         </div>
-        <div>
-            <label for="columnCount">Column count:</label>
-            <select id="columnCount">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
+    </fieldset>
+    <fieldset>
+        <legend>Background</legend>
+        <div class="radiogroup">
+            <input type="radio" name="greenbackOption" id="background-white" value="white" checked />
+            <label for="background-white"><img style="background-color: white;" src="images/word-normal.png">White</label>
+            <input type="radio" name="greenbackOption" id="background-green" value="green" />
+            <label for="background-green"><img style="background-color: #00902A;" src="images/word-normal.png">Green</label>
         </div>
-        <div>
-            <label for="compactOption">Compact mode:</label>
-            <input type="checkbox" id="compactOption" />
-        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Column count</legend>
+        <input type="range" id="columnCount" min="1" max="5" step="1" />
     </fieldset>
     <script src="options.js"></script>
 </body>
