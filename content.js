@@ -95,29 +95,25 @@ function applyStyleFromStorage() {
       default:
           background = '#FFFFFF';
     }
-
-    document.querySelectorAll('span.chord').forEach(function(chord) {
-        chord.style.fontSize = chordfontSize;
-        chord.style.fontWeight = chordfontWeight;
-        chord.style.top = chordtop;
-    });
-
-    document.querySelectorAll('span.word').forEach(function(word) {
-        word.style.fontWeight = wordfontWeight;
-    });
-
-    document.querySelectorAll('span.wordtop').forEach(function(word) {
-        word.style.fontWeight = wordfontWeight;
-    });
-
-    document.querySelectorAll('div.main').forEach(function(div) {
-        div.style.lineHeight = lineHeight;
-    });
-
-    document.body.style.backgroundColor = background;
-
     const styleSheet = new CSSStyleSheet();
-    styleSheet.replaceSync(`div.main div { column-count: ${columnCount}; }`);
+    styleSheet.replaceSync(`
+      span.chord {
+        font-size: ${chordfontSize};
+        font-weight: ${chordfontWeight};
+        top: ${chordtop};
+      }
+      span.word, span.wordtop {
+        font-weight: ${wordfontWeight};
+      }
+      div.main {
+        line-height: ${lineHeight};
+      }
+      body {
+        background-color: ${background};
+      }
+      div.main div {
+        column-count: ${columnCount};
+      }`);
     document.adoptedStyleSheets = [styleSheet];
 
     if (compactOption) {
