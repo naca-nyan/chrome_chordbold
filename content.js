@@ -73,7 +73,7 @@ function applyStyleFromStorage() {
       bold: "bold",
     }[wordstyleOption];
     const backgroundColor = {
-      enable: "#00902a",
+      enable: "#00ff00",
       disable: "#ffffff",
     }[greenbackOption];
 
