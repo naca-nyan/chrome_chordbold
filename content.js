@@ -1,134 +1,107 @@
+const styles = {
+  "normal": {
+    fontSize: "smaller",
+    fontWeight: "normal",
+    top: "-1.5em",
+    lineHeight: "1.5em",
+  },
+  "bold": {
+    fontSize: "smaller",
+    fontWeight: "bold",
+    top: "-1.5em",
+    lineHeight: "1.5em",
+  },
+  "bold-large": {
+    fontSize: "0.95em",
+    fontWeight: "bold",
+    top: "-1.3em",
+    lineHeight: "1.9em",
+  },
+  "bold-verylarge": {
+    fontSize: "1.05em",
+    fontWeight: "bold",
+    top: "-1.2em",
+    lineHeight: "2.1em",
+  },
+  "jazz": {
+    fontSize: "smaller",
+    fontWeight: "normal",
+    top: "-1.5em",
+    lineHeight: "1.5em",
+  },
+  "jazz-large": {
+    fontSize: "0.95em",
+    fontWeight: "normal",
+    top: "-1.3em",
+    lineHeight: "1.9em",
+  },
+  "jazz-verylarge": {
+    fontSize: "1.05em",
+    fontWeight: "normal",
+    top: "-1.2em",
+    lineHeight: "2.1em",
+  },
+};
+
+const options = [
+  "chordstyleOption",
+  "wordstyleOption",
+  "compactOption",
+  "greenbackOption",
+  "columnCount",
+];
+
 function applyStyleFromStorage() {
-  chrome.storage.sync.get(['chordstyleOption', 'wordstyleOption', 'greenbackOption', 'columnCount', 'compactOption'], function(item) {
-    const chordstyleOption = item.chordstyleOption || 'bold';
-    const wordstyleOption = item.wordstyleOption || 'normal';
-    const greenbackOption = item.greenbackOption || 'disable';
-    const columnCount = item.columnCount || '1';
-    const compactOption = item.compactOption || false;
-    let chordfontSize, chordfontWeight, chordtop, lineHeight;
-    let wordfontWeight;
-    let background;
-    let enableJazzFont = false;
+  chrome.storage.sync.get(options, (item) => {
+    const chordstyleOption = item.chordstyleOption ?? "bold";
+    const wordstyleOption = item.wordstyleOption ?? "normal";
+    const compactOption = item.compactOption ?? false;
+    const greenbackOption = item.greenbackOption ?? "disable";
+    const columnCount = item.columnCount ?? "1";
 
-    switch(chordstyleOption) {
-        case 'normal':
-            chordfontSize = 'smaller';
-            chordfontWeight = 'normal';
-            chordtop = '-1.5em';
-            lineHeight = '1.5em';
-            break;
-        case 'bold':
-            chordfontSize = 'smaller';
-            chordfontWeight = 'bold';
-            chordtop = '-1.5em';
-            lineHeight = '1.5em';
-            break;
-        case 'bold-large':
-            chordfontSize = '0.95em';
-            chordfontWeight = 'bold';
-            chordtop = '-1.3em';
-            lineHeight = '1.9em';
-            break;
-        case 'bold-verylarge':
-            chordfontSize = '1.05em';
-            chordfontWeight = 'bold';
-            chordtop = '-1.2em';
-            lineHeight = '2.1em';
-            break;
-        case 'jazz':
-            enableJazzFont = true;
-            chordfontSize = 'smaller';
-            chordfontWeight = 'normal';
-            chordtop = '-1.5em';
-            lineHeight = '1.5em';
-            break;
-        case 'jazz-large':
-            enableJazzFont = true;
-            chordfontSize = '0.95em';
-            chordfontWeight = 'normal';
-            chordtop = '-1.3em';
-            lineHeight = '1.9em';
-            break;
-        case 'jazz-verylarge':
-            enableJazzFont = true;
-            chordfontSize = '1.05em';
-            chordfontWeight = 'normal';
-            chordtop = '-1.2em';
-            lineHeight = '2.1em';
-            break;
-        default:
-            chordfontSize = 'smaller';
-            chordfontWeight = 'bold';
-            chordtop = '-1.5em';
-            lineHeight = '1.5em';
-    }
-
-    switch(wordstyleOption) {
-        case 'normal':
-            wordfontWeight = 'normal';
-            break;
-        case 'bold':
-            wordfontWeight = 'bold';
-            break;
-        default:
-            wordfontWeight = 'normal';
-    }
-
-    switch(wordstyleOption) {
-      case 'normal':
-          wordfontWeight = 'normal';
-          break;
-      case 'bold':
-          wordfontWeight = 'bold';
-          break;
-      default:
-          wordfontWeight = 'normal';
-    }
-
-    switch(greenbackOption) {
-      case 'disable':
-          background = '#FFFFFF';
-          break;
-      case 'enable':
-          background = '#00902A';
-          break;
-      default:
-          background = '#FFFFFF';
-    }
-
-    document.querySelectorAll('span.chord').forEach(function(chord) {
-        chord.style.fontSize = chordfontSize;
-        chord.style.fontWeight = chordfontWeight;
-        chord.style.top = chordtop;
-    });
-
-    document.querySelectorAll('span.word').forEach(function(word) {
-        word.style.fontWeight = wordfontWeight;
-    });
-
-    document.querySelectorAll('span.wordtop').forEach(function(word) {
-        word.style.fontWeight = wordfontWeight;
-    });
-
-    document.querySelectorAll('div.main').forEach(function(div) {
-        div.style.lineHeight = lineHeight;
-    });
-
-    document.body.style.backgroundColor = background;
+    const style = styles[chordstyleOption];
+    const wordFontWeight = {
+      normal: "normal",
+      bold: "bold",
+    }[wordstyleOption];
+    const backgroundColor = {
+      enable: "#00902a",
+      disable: "#ffffff",
+    }[greenbackOption];
 
     const styleSheet = new CSSStyleSheet();
-    styleSheet.replaceSync(`div.main div { column-count: ${columnCount}; }`);
+    styleSheet.replaceSync(`
+      span.chord {
+        font-size: ${style.fontSize};
+        font-weight: ${style.fontWeight};
+        top: ${style.top};
+      }
+      span.word, span.wordtop {
+        font-weight: ${wordFontWeight};
+      }
+      div.main {
+        line-height: ${style.lineHeight};
+      }
+      body {
+        background-color: ${backgroundColor};
+      }
+      div.main div {
+        column-count: ${columnCount};
+      }`);
     document.adoptedStyleSheets = [styleSheet];
 
     if (compactOption) {
       // Wrap every `span.chord` and `span.word` pair with `span.chordword`
-      document.querySelectorAll(".main .line").forEach(function(line) {
+      document.querySelectorAll(".main .line").forEach((line) => {
         const p = document.createElement("p");
         while (line.children.length > 0) {
           const chord = line.children[0];
           const word = line.children[1];
-          if (chord.classList.contains("chord") &&
-              word && word.classList.contains("word")) {
+          if (
+            chord.classList.contains("chord") &&
+            word &&
+            word.classList.contains("word")
+          ) {
             const span = document.createElement("span");
             span.classList = "chordword";
             span.appendChild(chord);
@@ -166,10 +139,13 @@ function applyStyleFromStorage() {
       document.adoptedStyleSheets.push(styleSheet);
     }
 
-    if (enableJazzFont) {
-      document.querySelectorAll('span.chord').forEach(function(chord) {
-        if (!chord.getAttribute("chord")) chord.setAttribute("chord", chord.innerText);
-        chord.innerText = chord.getAttribute("chord")
+    if (chordstyleOption.startsWith("jazz")) {
+      document.querySelectorAll("span.chord").forEach((chord) => {
+        if (!chord.getAttribute("chord")) {
+          chord.setAttribute("chord", chord.innerText);
+        }
+        chord.innerText = chord
+          .getAttribute("chord")
           .replaceAll("b", "\u266D")
           .replaceAll("#", "\u266F")
           .replaceAll(/Maj|maj|M/g, "\uE18A");
@@ -187,14 +163,16 @@ function applyStyleFromStorage() {
       `);
       document.adoptedStyleSheets.push(styleSheet);
     } else {
-      document.querySelectorAll('span.chord').forEach(function(chord) {
-        if (chord.getAttribute("chord")) chord.innerText = chord.getAttribute("chord");
+      document.querySelectorAll("span.chord").forEach((chord) => {
+        if (chord.getAttribute("chord")) {
+          chord.innerText = chord.getAttribute("chord");
+        }
       });
     }
   });
 }
 
 applyStyleFromStorage();
-chrome.storage.onChanged.addListener(function() {
+chrome.storage.onChanged.addListener(() => {
   applyStyleFromStorage();
 });
