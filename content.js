@@ -8,6 +8,7 @@ function applyStyleFromStorage() {
     let chordfontSize, chordfontWeight, chordtop, lineHeight;
     let wordfontWeight;
     let background;
+    let enableJazzFont = false;
 
     switch(chordstyleOption) {
         case 'normal':
@@ -31,6 +32,27 @@ function applyStyleFromStorage() {
         case 'bold-verylarge':
             chordfontSize = '1.05em';
             chordfontWeight = 'bold';
+            chordtop = '-1.2em';
+            lineHeight = '2.1em';
+            break;
+        case 'jazz':
+            enableJazzFont = true;
+            chordfontSize = 'smaller';
+            chordfontWeight = 'normal';
+            chordtop = '-1.5em';
+            lineHeight = '1.5em';
+            break;
+        case 'jazz-large':
+            enableJazzFont = true;
+            chordfontSize = '0.95em';
+            chordfontWeight = 'normal';
+            chordtop = '-1.3em';
+            lineHeight = '1.9em';
+            break;
+        case 'jazz-verylarge':
+            enableJazzFont = true;
+            chordfontSize = '1.05em';
+            chordfontWeight = 'normal';
             chordtop = '-1.2em';
             lineHeight = '2.1em';
             break;
@@ -142,6 +164,32 @@ function applyStyleFromStorage() {
         }
       `);
       document.adoptedStyleSheets.push(styleSheet);
+    }
+
+    if (enableJazzFont) {
+      document.querySelectorAll('span.chord').forEach(function(chord) {
+        if (!chord.getAttribute("chord")) chord.setAttribute("chord", chord.innerText);
+        chord.innerText = chord.getAttribute("chord")
+          .replaceAll("b", "\u266D")
+          .replaceAll("#", "\u266F")
+          .replaceAll(/Maj|maj|M/g, "\uE18A");
+      });
+      const styleSheet = new CSSStyleSheet();
+      styleSheet.replaceSync(`
+        @font-face {
+          font-family: "MuseJazz Text";
+          size-adjust: 110%;
+          src: local("MuseJazz Text"), url(https://cdn.jsdelivr.net/npm/@vexflow-fonts/musejazztext@1.0.1/musejazztext.woff2) format("woff2");
+        }
+        div.main span.chord {
+          font-family: "MuseJazz Text";
+        }
+      `);
+      document.adoptedStyleSheets.push(styleSheet);
+    } else {
+      document.querySelectorAll('span.chord').forEach(function(chord) {
+        if (chord.getAttribute("chord")) chord.innerText = chord.getAttribute("chord");
+      });
     }
   });
 }
