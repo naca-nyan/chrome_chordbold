@@ -144,10 +144,11 @@ function applyStyleFromStorage() {
         if (!chord.getAttribute("chord")) {
           chord.setAttribute("chord", chord.innerText);
         }
-        chord.innerText = chord
+        chord.innerHTML = chord
           .getAttribute("chord")
           .replaceAll("b", "\u266D")
           .replaceAll("#", "\u266F")
+          .replaceAll(/(.+)(\(.+?\))/g, "$1<sup>$2</sup>")
           .replaceAll(/Maj|maj|M/g, "\uE18A");
       });
       const styleSheet = new CSSStyleSheet();
