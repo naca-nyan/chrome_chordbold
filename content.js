@@ -49,6 +49,10 @@ const options = [
   "compactOption",
   "greenbackOption",
   "columnCount",
+  "replaceMaj",
+  "replaceAug",
+  "replaceDim",
+  "replaceHalfDim",
 ];
 
 function applyStyleFromStorage() {
@@ -58,6 +62,10 @@ function applyStyleFromStorage() {
     const compactOption = item.compactOption ?? false;
     const greenbackOption = item.greenbackOption ?? "disable";
     const columnCount = item.columnCount ?? "1";
+    const replaceMaj = item.replaceMaj ?? true;
+    const replaceAug = item.replaceAug ?? false;
+    const replaceDim = item.replaceDim ?? false;
+    const replaceHalfDim = item.replaceHalfDim ?? false;
 
     const style = styles[chordstyleOption];
     const wordFontWeight = {
@@ -140,16 +148,23 @@ function applyStyleFromStorage() {
     }
 
     if (chordstyleOption.startsWith("jazz")) {
+      const replaceEntries = [
+        replaceAug && [/aug/g, "\uE186"],
+        replaceDim && [/dim/g, "\uE187"],
+        replaceMaj && [/Maj|maj|M/g, "\uE18A"],
+        replaceHalfDim && [/m7-5|m7b5/g, "\uE18F"],
+        ["b", "\u266D"],
+        ["#", "\u266F"],
+        [/(.+)(\(.+?\))/g, "$1<sup>$2</sup>"],
+      ].filter((x) => x !== false);
       document.querySelectorAll("span.chord").forEach((chord) => {
         if (!chord.getAttribute("chord")) {
           chord.setAttribute("chord", chord.innerText);
         }
-        chord.innerHTML = chord
-          .getAttribute("chord")
-          .replaceAll("b", "\u266D")
-          .replaceAll("#", "\u266F")
-          .replaceAll(/(.+)(\(.+?\))/g, "$1<sup>$2</sup>")
-          .replaceAll(/Maj|maj|M/g, "\uE18A");
+        chord.innerHTML = chord.getAttribute("chord");
+        for (const [from, to] of replaceEntries) {
+          chord.innerHTML = chord.innerHTML.replaceAll(from, to);
+        }
       });
       const styleSheet = new CSSStyleSheet();
       styleSheet.replaceSync(`

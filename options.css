@@ -53,3 +53,27 @@ header img {
 .text-center {
   text-align: center;
 }
+details {
+  padding-left: 5px;
+}
+details[open] .on-close {
+  display: none;
+}
+details + .on-open {
+  display: none;
+}
+details[open] + .on-open {
+  display: block;
+}
+.center {
+  justify-self: center;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+ul li {
+  display: flex;
+  gap: 5px;
+}

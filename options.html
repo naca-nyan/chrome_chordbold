@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>ChordWiki Bold Options</title>
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="options.css">
 </head>
 <body>
@@ -43,6 +44,16 @@
         <legend>Column Count</legend>
         <label for="columnCount" id="columnCountText" class="text-center">1</label>
         <input type="range" id="columnCount" min="1" max="5" step="1" value="1"/>
+    </fieldset>
+    <details><summary><span class="on-close">Advanced</span></summary></details>
+    <fieldset class="on-open">
+        <legend>Advanced</legend>
+        <ul class="center">
+            <li><input type="checkbox" id="replaceMaj" checked>maj → △ (only in Jazz mode)</li>
+            <li><input type="checkbox" id="replaceAug">aug → + (only in Jazz mode)</li>
+            <li><input type="checkbox" id="replaceDim">dim → ○ (only in Jazz mode)</li>
+            <li><input type="checkbox" id="replaceHalfDim">m7-5 → Ø (only in Jazz mode)</li>
+        </ul>
     </fieldset>
     <script src="options.js"></script>
 </body>
