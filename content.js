@@ -47,6 +47,8 @@ const options = [
   "chordstyleOption",
   "wordstyleOption",
   "compactOption",
+  "compactLineHeight",
+  "compactChordMargin",
   "backgroundColor",
   "backgroundColorEnabled",
   "columnCount",
@@ -61,6 +63,8 @@ function applyStyleFromStorage() {
     const chordstyleOption = item.chordstyleOption ?? "bold";
     const wordstyleOption = item.wordstyleOption ?? "normal";
     const compactOption = item.compactOption ?? false;
+    const compactLineHeight = item.compactLineHeight ?? "16";
+    const compactChordMargin = item.compactChordMargin ?? "6";
     const backgroundColor = item.backgroundColorEnabled
       ? item.backgroundColor ?? "#00ff00"
       : "#ffffff";
@@ -128,13 +132,13 @@ function applyStyleFromStorage() {
         }
         div.main span.chord, div.main span.word, div.main span.wordtop {
           position: static;
-          line-height: 1em;
+          line-height: ${compactLineHeight}px;
         }
         div.main span.wordtop {
           vertical-align: bottom;
         }
         div.main span.chord {
-          margin-right: 6px;
+          margin-right: ${compactChordMargin}px;
         }
         div.main span.word {
           white-space: pre;
