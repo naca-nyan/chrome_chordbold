@@ -5,7 +5,10 @@
   "description": "Update the style of chord spans on ChordWiki pages.",
   "permissions": ["storage"],
   "content_scripts": [{
-    "matches": ["https://ja.chordwiki.org/wiki/*"],
+    "matches": [
+      "https://ja.chordwiki.org/wiki/*",
+      "https://ja.chordwiki.org/wiki.cgi*"
+    ],
     "js": ["content.js"],
     "run_at": "document_end"
   }],
