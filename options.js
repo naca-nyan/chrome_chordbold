@@ -29,7 +29,10 @@ const options = [
   "chordstyleOption",
   "wordstyleOption",
   "compactOption",
-  "greenbackOption",
+  "compactLineHeight",
+  "compactChordMargin",
+  "backgroundColor",
+  "backgroundColorEnabled",
   "columnCount",
   "replaceMaj",
   "replaceAug",
@@ -42,7 +45,10 @@ function saveOptions() {
     chordstyleOption: getRadioValue("chordstyleOption") ?? "normal",
     wordstyleOption: $("wordstyleOption").checked ? "bold" : "normal",
     compactOption: $("compactOption").checked,
-    greenbackOption: $("greenbackOption").checked ? "enable" : "disable",
+    compactLineHeight: $("compactLineHeight").value ?? "16",
+    compactChordMargin: $("compactChordMargin").value ?? "6",
+    backgroundColorEnabled: $("backgroundColorEnabled").checked,
+    backgroundColor: $("backgroundColorPicker").value ?? "#00ff00",
     columnCount: $("columnCount").value,
     replaceMaj: $("replaceMaj").checked,
     replaceAug: $("replaceAug").checked,
@@ -57,7 +63,13 @@ function saveOptions() {
 setRadioBehavior("chordstyleOption", saveOptions);
 $("wordstyleOption").onchange = saveOptions;
 $("compactOption").onchange = saveOptions;
-$("greenbackOption").onchange = saveOptions;
+$("compactLineHeight").oninput = saveOptions;
+$("compactChordMargin").oninput = saveOptions;
+$("backgroundColorEnabled").onchange = saveOptions;
+$("backgroundColorPicker").onchange = (e) => {
+  $("background-color-icon").style.backgroundColor = e.target.value;
+  if ($("backgroundColorEnabled").checked) saveOptions();
+};
 $("columnCount").oninput = (e) => {
   $("columnCountText").innerText = e.target.value;
   saveOptions();
@@ -73,7 +85,12 @@ document.addEventListener("DOMContentLoaded", () => {
     setRadioValue("chordstyleOption", item.chordstyleOption || "bold");
     $("wordstyleOption").checked = item.wordstyleOption == "bold";
     $("compactOption").checked = item.compactOption;
-    $("greenbackOption").checked = item.greenbackOption == "enable";
+    $("compactLineHeight").value = item.compactLineHeight ?? "16";
+    $("compactChordMargin").value = item.compactChordMargin ?? "6";
+    $("backgroundColorEnabled").checked = item.backgroundColorEnabled;
+    const backgroundColor = item.backgroundColor ?? "#00ff00";
+    $("backgroundColorPicker").value = backgroundColor;
+    $("background-color-icon").style.backgroundColor = backgroundColor;
     $("columnCount").value = item.columnCount || "1";
     $("columnCountText").innerText = item.columnCount || "1";
     $("replaceMaj").checked = item.replaceMaj || true;

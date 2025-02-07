@@ -33,6 +33,9 @@ header img {
   text-align: center;
   cursor: pointer;
 }
+.toggle-box-wrapper label:hover {
+  background-color: #f7f7f7;
+}
 .toggle-box-wrapper input[type="checkbox"] {
   display: none;
 }
@@ -68,12 +71,34 @@ details[open] + .on-open {
 .center {
   justify-self: center;
 }
+h4 {
+  margin-block: 0;
+  font-weight: bold;
+  color: #444;
+}
 ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-ul li {
+ul.checkbox-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+ul.checkbox-wrapper li {
   display: flex;
+  align-items: center;
   gap: 5px;
+}
+ul.number-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+ul.number-wrapper span {
+  display: block;
+  font-size: 0.8em;
+}
+ul.number-wrapper input[type="number"] {
+  width: 90px;
 }
