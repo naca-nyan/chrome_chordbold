@@ -143,8 +143,9 @@ function applyStyleFromStorage() {
         div.main span.word {
           white-space: pre;
         }
-        div.main p.line {
+        div.main p {
           margin-block: 0 .3em;
+          line-height: ${compactLineHeight}px;
         }
       `);
       document.adoptedStyleSheets.push(styleSheet);
