@@ -1,22 +1,17 @@
 {
-    "manifest_version": 3,
-    "name": "ChordWiki Bold",
-    "version": "1.1.1",
-    "description": "Update the style of chord spans on ChordWiki pages.",
-    "permissions": [
-      "storage"
+  "manifest_version": 3,
+  "name": "ChordWiki Bold",
+  "version": "1.1.0",
+  "description": "Update the style of chord spans on ChordWiki pages.",
+  "permissions": ["storage"],
+  "content_scripts": [{
+    "matches": [
+      "https://ja.chordwiki.org/wiki/*",
+      "https://ja.chordwiki.org/wiki.cgi*"
     ],
-    "content_scripts": [
-      {
-        "matches": ["https://ja.chordwiki.org/*"],
-        "js": ["content.js"],
-        "run_at": "document_end"
-      }
-    ],
-    "icons": {
-      "128": "icon.png"
-    },
-    "action": {
-      "default_popup": "options.html"
-    }
-  }
+    "js": ["content.js"],
+    "run_at": "document_end"
+  }],
+  "icons": { "128": "icon.png" },
+  "action": { "default_popup": "options.html" }
+}
