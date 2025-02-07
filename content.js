@@ -160,7 +160,7 @@ function applyStyleFromStorage() {
         ["b", "\u266D"],
         ["#", "\u266F"],
         [/(.+)(\(.+?\))/g, "$1<sup>$2</sup>"],
-        [/^([^\(]+)([-+][59])/g, "$1<sup>$2</sup>"],
+        [/^([^\(]+)([-+][59]|omit[35])/g, "$1<sup>$2</sup>"],
       ].filter((x) => x !== false);
       document.querySelectorAll("span.chord").forEach((chord) => {
         if (!chord.getAttribute("chord")) {
