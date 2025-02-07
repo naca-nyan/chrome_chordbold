@@ -31,6 +31,10 @@ const options = [
   "compactOption",
   "greenbackOption",
   "columnCount",
+  "replaceMaj",
+  "replaceAug",
+  "replaceDim",
+  "replaceHalfDim",
 ];
 // Save the options
 function saveOptions() {
@@ -40,6 +44,10 @@ function saveOptions() {
     compactOption: $("compactOption").checked,
     greenbackOption: $("greenbackOption").checked ? "enable" : "disable",
     columnCount: $("columnCount").value,
+    replaceMaj: $("replaceMaj").checked,
+    replaceAug: $("replaceAug").checked,
+    replaceDim: $("replaceDim").checked,
+    replaceHalfDim: $("replaceHalfDim").checked,
   };
   chrome.storage.sync.set(values, () => {
     console.log("Option saved.");
@@ -54,6 +62,10 @@ $("columnCount").oninput = (e) => {
   $("columnCountText").innerText = e.target.value;
   saveOptions();
 };
+$("replaceMaj").onchange = saveOptions;
+$("replaceAug").onchange = saveOptions;
+$("replaceDim").onchange = saveOptions;
+$("replaceHalfDim").onchange = saveOptions;
 
 // Load the saved options
 document.addEventListener("DOMContentLoaded", () => {
@@ -64,5 +76,9 @@ document.addEventListener("DOMContentLoaded", () => {
     $("greenbackOption").checked = item.greenbackOption == "enable";
     $("columnCount").value = item.columnCount || "1";
     $("columnCountText").innerText = item.columnCount || "1";
+    $("replaceMaj").checked = item.replaceMaj || true;
+    $("replaceAug").checked = item.replaceAug || false;
+    $("replaceDim").checked = item.replaceDim || false;
+    $("replaceHalfDim").checked = item.replaceHalfDim || false;
   });
 });
