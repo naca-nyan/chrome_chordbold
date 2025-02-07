@@ -143,7 +143,7 @@ function applyStyleFromStorage() {
         div.main span.word {
           white-space: pre;
         }
-        div.main p {
+        div.main p, div.main br {
           margin-block: 0 .3em;
           line-height: ${compactLineHeight}px;
         }
