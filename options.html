@@ -1,60 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ChordWiki Bold Options</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="options.css">
+	<title>ChordWiki Bold Options</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="options.css">
 </head>
 <body>
-    <header>
-        <img alt="logo" src="./icon.png" />
-        <h2>ChordWiki Bold</h2>
-    </header>
-    <fieldset>
-        <legend>Chord Style</legend>
-        <div class="toggle-box-wrapper">
-            <input type="checkbox" name="chordstyleOption" value="bold" id="chord-bold" checked/>
-            <label for="chord-bold"><img src="images/chord-bold.png"/>Bold</label>
-            <input type="checkbox" name="chordstyleOption" value="bold-large" id="chord-bold-large" />
-            <label for="chord-bold-large"><img src="images/chord-boldlarge.png"/>Bold Large</label>
-            <input type="checkbox" name="chordstyleOption" value="bold-verylarge" id="chord-bold-verylarge" />
-            <label for="chord-bold-verylarge"><img src="images/chord-boldverylarge.png"/>Bold Very Large</label>
-        </div>
-        <div class="toggle-box-wrapper">
-            <input type="checkbox" name="chordstyleOption" value="jazz" id="chord-jazz" />
-            <label for="chord-jazz"><img src="images/chord-jazz.png"/>Jazz</label>
-            <input type="checkbox" name="chordstyleOption" value="jazz-large" id="chord-jazz-large"/>
-            <label for="chord-jazz-large"><img src="images/chord-jazzlarge.png"/>Jazz Large</label>
-            <input type="checkbox" name="chordstyleOption" value="jazz-verylarge" id="chord-jazz-verylarge"/>
-            <label for="chord-jazz-verylarge"><img src="images/chord-jazzverylarge.png"/>Jazz Very Large</label>
-        </div>
-    </fieldset>
-    <fieldset>
-        <legend>Other Style</legend>
-        <div class="toggle-box-wrapper">
-            <input type="checkbox" id="wordstyleOption" />
-            <label for="wordstyleOption"><img src="images/word-bold.png"/>Word Bold</label>
-            <input type="checkbox" id="compactOption" />
-            <label for="compactOption"><img src="images/compact-compact.png"/>Compact</label>
-            <input type="checkbox" id="greenbackOption" />
-            <label for="greenbackOption"><img style="background-color: #00ff00;" src="images/word-normal.png">Greenback</label>
-        </div>
-    </fieldset>
-    <fieldset class="flex-column">
-        <legend>Column Count</legend>
-        <label for="columnCount" id="columnCountText" class="text-center">1</label>
-        <input type="range" id="columnCount" min="1" max="5" step="1" value="1"/>
-    </fieldset>
-    <details><summary><span class="on-close">Advanced</span></summary></details>
-    <fieldset class="on-open">
-        <legend>Advanced</legend>
-        <ul class="center">
-            <li><input type="checkbox" id="replaceMaj" checked>maj → △ (only in Jazz mode)</li>
-            <li><input type="checkbox" id="replaceAug">aug → + (only in Jazz mode)</li>
-            <li><input type="checkbox" id="replaceDim">dim → ○ (only in Jazz mode)</li>
-            <li><input type="checkbox" id="replaceHalfDim">m7-5 → Ø (only in Jazz mode)</li>
-        </ul>
-    </fieldset>
-    <script src="options.js"></script>
+	<header>
+		<img alt="logo" src="./icon.png" />
+		<h2>ChordWiki Bold</h2>
+	</header>
+	<fieldset>
+		<legend>Chord Style</legend>
+		<div class="toggle-box-wrapper">
+			<input type="checkbox" name="chordstyleOption" value="bold" id="chord-bold" checked/>
+			<label for="chord-bold"><img src="images/chord-bold.png"/>Bold</label>
+			<input type="checkbox" name="chordstyleOption" value="bold-large" id="chord-bold-large" />
+			<label for="chord-bold-large"><img src="images/chord-boldlarge.png"/>Bold Large</label>
+			<input type="checkbox" name="chordstyleOption" value="bold-verylarge" id="chord-bold-verylarge" />
+			<label for="chord-bold-verylarge"><img src="images/chord-boldverylarge.png"/>Bold Very Large</label>
+		</div>
+		<div class="toggle-box-wrapper">
+			<input type="checkbox" name="chordstyleOption" value="jazz" id="chord-jazz" />
+			<label for="chord-jazz"><img src="images/chord-jazz.png"/>Jazz</label>
+			<input type="checkbox" name="chordstyleOption" value="jazz-large" id="chord-jazz-large"/>
+			<label for="chord-jazz-large"><img src="images/chord-jazzlarge.png"/>Jazz Large</label>
+			<input type="checkbox" name="chordstyleOption" value="jazz-verylarge" id="chord-jazz-verylarge"/>
+			<label for="chord-jazz-verylarge"><img src="images/chord-jazzverylarge.png"/>Jazz Very Large</label>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>Other Style</legend>
+		<div class="toggle-box-wrapper">
+			<input type="checkbox" id="wordstyleOption" />
+			<label for="wordstyleOption"><img src="images/word-bold.png"/>Word Bold</label>
+			<input type="checkbox" id="compactOption" />
+			<label for="compactOption"><img src="images/compact-compact.png"/>Compact</label>
+			<input type="checkbox" id="backgroundColorEnabled" />
+			<label for="backgroundColorEnabled">
+				<img id="background-color-icon" style="background-color: #00ff00;" src="images/word-normal.png">
+				Bg Color
+			</label>
+		</div>
+	</fieldset>
+	<fieldset class="flex-column">
+		<legend>Column Count</legend>
+		<label for="columnCount" id="columnCountText" class="text-center">1</label>
+		<input type="range" id="columnCount" min="1" max="5" step="1" value="1"/>
+	</fieldset>
+	<details><summary><span class="on-close">Advanced</span></summary></details>
+	<fieldset class="on-open">
+		<legend>Advanced</legend>
+		<ul class="center">
+			<li><input type="checkbox" id="replaceMaj" checked>maj → △ (only in Jazz mode)</li>
+			<li><input type="checkbox" id="replaceAug">aug → + (only in Jazz mode)</li>
+			<li><input type="checkbox" id="replaceDim">dim → ○ (only in Jazz mode)</li>
+			<li><input type="checkbox" id="replaceHalfDim">m7-5 → Ø (only in Jazz mode)</li>
+			<li><input type="color" id="backgroundColorPicker" value="#00ff00">Background color</li>
+		</ul>
+	</fieldset>
+	<script src="options.js"></script>
 </body>
 </html>

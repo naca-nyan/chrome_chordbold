@@ -29,7 +29,8 @@ const options = [
   "chordstyleOption",
   "wordstyleOption",
   "compactOption",
-  "greenbackOption",
+  "backgroundColor",
+  "backgroundColorEnabled",
   "columnCount",
   "replaceMaj",
   "replaceAug",
@@ -42,7 +43,8 @@ function saveOptions() {
     chordstyleOption: getRadioValue("chordstyleOption") ?? "normal",
     wordstyleOption: $("wordstyleOption").checked ? "bold" : "normal",
     compactOption: $("compactOption").checked,
-    greenbackOption: $("greenbackOption").checked ? "enable" : "disable",
+    backgroundColorEnabled: $("backgroundColorEnabled").checked,
+    backgroundColor: $("backgroundColorPicker").value ?? "#00ff00",
     columnCount: $("columnCount").value,
     replaceMaj: $("replaceMaj").checked,
     replaceAug: $("replaceAug").checked,
@@ -57,7 +59,11 @@ function saveOptions() {
 setRadioBehavior("chordstyleOption", saveOptions);
 $("wordstyleOption").onchange = saveOptions;
 $("compactOption").onchange = saveOptions;
-$("greenbackOption").onchange = saveOptions;
+$("backgroundColorEnabled").onchange = saveOptions;
+$("backgroundColorPicker").onchange = (e) => {
+  $("background-color-icon").style.backgroundColor = e.target.value;
+  if ($("backgroundColorEnabled").checked) saveOptions();
+};
 $("columnCount").oninput = (e) => {
   $("columnCountText").innerText = e.target.value;
   saveOptions();
@@ -73,7 +79,10 @@ document.addEventListener("DOMContentLoaded", () => {
     setRadioValue("chordstyleOption", item.chordstyleOption || "bold");
     $("wordstyleOption").checked = item.wordstyleOption == "bold";
     $("compactOption").checked = item.compactOption;
-    $("greenbackOption").checked = item.greenbackOption == "enable";
+    $("backgroundColorEnabled").checked = item.backgroundColorEnabled;
+    const backgroundColor = item.backgroundColor ?? "#00ff00";
+    $("backgroundColorPicker").value = backgroundColor;
+    $("background-color-icon").style.backgroundColor = backgroundColor;
     $("columnCount").value = item.columnCount || "1";
     $("columnCountText").innerText = item.columnCount || "1";
     $("replaceMaj").checked = item.replaceMaj || true;

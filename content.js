@@ -47,7 +47,8 @@ const options = [
   "chordstyleOption",
   "wordstyleOption",
   "compactOption",
-  "greenbackOption",
+  "backgroundColor",
+  "backgroundColorEnabled",
   "columnCount",
   "replaceMaj",
   "replaceAug",
@@ -60,7 +61,9 @@ function applyStyleFromStorage() {
     const chordstyleOption = item.chordstyleOption ?? "bold";
     const wordstyleOption = item.wordstyleOption ?? "normal";
     const compactOption = item.compactOption ?? false;
-    const greenbackOption = item.greenbackOption ?? "disable";
+    const backgroundColor = item.backgroundColorEnabled
+      ? item.backgroundColor ?? "#00ff00"
+      : "#ffffff";
     const columnCount = item.columnCount ?? "1";
     const replaceMaj = item.replaceMaj ?? true;
     const replaceAug = item.replaceAug ?? false;
@@ -72,10 +75,6 @@ function applyStyleFromStorage() {
       normal: "normal",
       bold: "bold",
     }[wordstyleOption];
-    const backgroundColor = {
-      enable: "#00ff00",
-      disable: "#ffffff",
-    }[greenbackOption];
 
     const styleSheet = new CSSStyleSheet();
     styleSheet.replaceSync(`
