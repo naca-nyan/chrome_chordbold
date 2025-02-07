@@ -8,7 +8,7 @@
     ],
     "content_scripts": [
       {
-        "matches": ["https://ja.chordwiki.org/*"],
+        "matches": ["https://ja.chordwiki.org/wiki/*"],
         "js": ["content.js"],
         "run_at": "document_end"
       }
