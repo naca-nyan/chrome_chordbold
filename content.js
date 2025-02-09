@@ -205,6 +205,10 @@ document.addEventListener("keypress", (e) => {
     const main = document.querySelector("div.main");
     if (fullscreen) {
       const color = window.getComputedStyle(document.body).backgroundColor;
+      main.style.display = "flex";
+      main.style.flexDirection = "column";
+      main.style.justifyContent = "safe center";
+      main.style.alignItems = "safe center";
       main.style.backgroundColor = color;
       main.style.padding = "0 20px 20px 20px";
       main.style.overflow = "auto";
