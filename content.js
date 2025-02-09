@@ -199,26 +199,28 @@ chrome.storage.onChanged.addListener(() => {
 });
 
 let fullscreen = false;
-document.addEventListener("keypress", (e) => {
-  if (e.key === "f") {
-    fullscreen = !fullscreen;
-    const main = document.querySelector("div.main");
-    const mainDiv = document.querySelector("div.main div");
-    if (fullscreen) {
-      const color = window.getComputedStyle(document.body).backgroundColor;
-      main.style.display = "flex";
-      main.style.flexDirection = "column";
-      main.style.justifyContent = "safe center";
-      main.style.backgroundColor = color;
-      main.style.paddingBottom = "20px";
-      main.style.overflow = "auto";
-      mainDiv.style.margin = "0 auto";
-      mainDiv.style.maxWidth = "97vw";
-      main.requestFullscreen();
-    } else {
-      main.style = null;
-      mainDiv.style = null;
-      if (document.fullscreenElement) document.exitFullscreen();
-    }
+function toggleFullscreen() {
+  fullscreen = !fullscreen;
+  const main = document.querySelector("div.main");
+  const mainDiv = document.querySelector("div.main div");
+  if (fullscreen) {
+    const color = window.getComputedStyle(document.body).backgroundColor;
+    main.style.display = "flex";
+    main.style.flexDirection = "column";
+    main.style.justifyContent = "safe center";
+    main.style.backgroundColor = color;
+    main.style.paddingBottom = "20px";
+    main.style.overflow = "auto";
+    mainDiv.style.margin = "0 auto";
+    mainDiv.style.maxWidth = "97vw";
+    main.requestFullscreen();
+  } else {
+    main.style = null;
+    mainDiv.style = null;
+    if (document.fullscreenElement) document.exitFullscreen();
   }
+}
+document.addEventListener("keypress", (e) => {
+  if (e.key === "f") toggleFullscreen();
 });
+document.addEventListener("dblclick", toggleFullscreen);
