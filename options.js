@@ -82,7 +82,7 @@ $("replaceHalfDim").onchange = saveOptions;
 // Load the saved options
 document.addEventListener("DOMContentLoaded", () => {
   chrome.storage.sync.get(options, (item) => {
-    setRadioValue("chordstyleOption", item.chordstyleOption || "bold");
+    setRadioValue("chordstyleOption", item.chordstyleOption ?? "bold");
     $("wordstyleOption").checked = item.wordstyleOption == "bold";
     $("compactOption").checked = item.compactOption;
     $("compactLineHeight").value = item.compactLineHeight ?? "16";
@@ -91,11 +91,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const backgroundColor = item.backgroundColor ?? "#00ff00";
     $("backgroundColorPicker").value = backgroundColor;
     $("background-color-icon").style.backgroundColor = backgroundColor;
-    $("columnCount").value = item.columnCount || "1";
-    $("columnCountText").innerText = item.columnCount || "1";
-    $("replaceMaj").checked = item.replaceMaj || true;
-    $("replaceAug").checked = item.replaceAug || false;
-    $("replaceDim").checked = item.replaceDim || false;
-    $("replaceHalfDim").checked = item.replaceHalfDim || false;
+    $("columnCount").value = item.columnCount ?? "1";
+    $("columnCountText").innerText = item.columnCount ?? "1";
+    $("replaceMaj").checked = item.replaceMaj ?? true;
+    $("replaceAug").checked = item.replaceAug ?? false;
+    $("replaceDim").checked = item.replaceDim ?? false;
+    $("replaceHalfDim").checked = item.replaceHalfDim ?? false;
   });
 });
