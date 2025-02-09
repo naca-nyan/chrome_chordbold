@@ -197,3 +197,21 @@ applyStyleFromStorage();
 chrome.storage.onChanged.addListener(() => {
   applyStyleFromStorage();
 });
+
+let fullscreen = false;
+document.addEventListener("keypress", (e) => {
+  if (e.key === "f") {
+    fullscreen = !fullscreen;
+    const main = document.querySelector("div.main");
+    if (fullscreen) {
+      const color = window.getComputedStyle(document.body).backgroundColor;
+      main.style.backgroundColor = color;
+      main.style.padding = "0 20px 20px 20px";
+      main.style.overflow = "auto";
+      main.requestFullscreen();
+    } else {
+      main.style = null;
+      if (document.fullscreenElement) document.exitFullscreen();
+    }
+  }
+});
