@@ -199,11 +199,11 @@ chrome.storage.onChanged.addListener(() => {
 });
 
 let fullscreen = false;
-function toggleFullscreen() {
-  fullscreen = !fullscreen;
+function setFullscreen(value = true) {
+  fullscreen = value;
   const main = document.querySelector("div.main");
   const mainDiv = document.querySelector("div.main div");
-  if (fullscreen) {
+  if (value) {
     const color = window.getComputedStyle(document.body).backgroundColor;
     main.style.display = "flex";
     main.style.flexDirection = "column";
@@ -221,6 +221,11 @@ function toggleFullscreen() {
   }
 }
 document.addEventListener("keypress", (e) => {
-  if (e.key === "f") toggleFullscreen();
+  if (e.key === "f") setFullscreen(!fullscreen);
 });
-document.addEventListener("dblclick", toggleFullscreen);
+document.addEventListener("dblclick", () => {
+  setFullscreen(!fullscreen);
+});
+document.addEventListener("fullscreenchange", () => {
+  if (!document.fullscreenElement) setFullscreen(false);
+});
