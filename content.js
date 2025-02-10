@@ -159,7 +159,7 @@ function applyStyleFromStorage() {
         replaceHalfDim && [/m7[-b]5|m7\([-b]5\)/g, "\uE18F"],
         ["b", "\u266D"],
         ["#", "\u266F"],
-        [/(.+)(\(.+?\))/g, "$1<sup>$2</sup>"],
+        [/([^/]+?)(\([^/]+?\))/g, "$1<sup>$2</sup>"],
         [/^([^\(]+)([-+][59]|omit[35])/g, "$1<sup>$2</sup>"],
       ].filter((x) => x !== false);
       document.querySelectorAll("span.chord").forEach((chord) => {
