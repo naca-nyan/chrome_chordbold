@@ -277,6 +277,7 @@ function enableEmbedPlayer() {
     container: document.createElement("div"),
     player: document.createElement("div"),
     button: document.createElement("button"),
+    active: false,
     init() {
       this.container.style.position = "fixed";
       this.container.style.zIndex = 2147483647;
@@ -295,6 +296,7 @@ function enableEmbedPlayer() {
         `<iframe width="640" height="360" src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
     },
     setActive(value = true) {
+      this.active = value;
       if (value) {
         document.body.append(this.container);
       } else {
@@ -310,7 +312,7 @@ function enableEmbedPlayer() {
       videoPlayer.setVideo(videoId);
       movieFirst.onclick = (e) => {
         e.preventDefault();
-        videoPlayer.setActive(true);
+        if (!videoPlayer.active) videoPlayer.setActive(true);
       };
     }
   }
