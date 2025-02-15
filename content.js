@@ -92,6 +92,9 @@ function applyStyleFromStorage() {
       span.word, span.wordtop {
         font-weight: ${wordFontWeight};
       }
+      span.chord, span.word, span.wordtop {
+        white-space: pre;
+      }
       div.main {
         line-height: ${style.lineHeight};
       }
@@ -142,9 +145,6 @@ function applyStyleFromStorage() {
         div.main span.chord {
           margin-right: ${compactChordMargin}px;
         }
-        div.main span.word {
-          white-space: pre;
-        }
         div.main p, div.main br {
           margin-block: 0 .3em;
           line-height: ${compactLineHeight}px;
@@ -159,9 +159,10 @@ function applyStyleFromStorage() {
         replaceDim && [/dim/g, "\uE187"],
         replaceMaj && [/Maj|maj|M/g, "\uE18A"],
         replaceHalfDim && [/m7[-b]5|m7\([-b]5\)/g, "\uE18F"],
+        ["&nbsp;", " "],
         ["b", "\u266D"],
         ["#", "\u266F"],
-        [/([^/]+?)(\([^/]+?\))/g, "$1<sup>$2</sup>"],
+        [/([^/\s]+?)(\([^/]+?\))/g, "$1<sup>$2</sup>"],
         [/^([^\(]+)([-+][59]|omit[35])/g, "$1<sup>$2</sup>"],
       ].filter((x) => x !== false);
       document.querySelectorAll("span.chord").forEach((chord) => {
