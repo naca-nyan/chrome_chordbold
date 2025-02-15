@@ -38,6 +38,7 @@ const options = [
   "replaceAug",
   "replaceDim",
   "replaceHalfDim",
+  "useEmbedPlayer",
 ];
 // Save the options
 function saveOptions() {
@@ -54,6 +55,7 @@ function saveOptions() {
     replaceAug: $("replaceAug").checked,
     replaceDim: $("replaceDim").checked,
     replaceHalfDim: $("replaceHalfDim").checked,
+    useEmbedPlayer: $("useEmbedPlayer").checked,
   };
   chrome.storage.sync.set(values, () => {
     console.log("Option saved.");
@@ -78,6 +80,7 @@ $("replaceMaj").onchange = saveOptions;
 $("replaceAug").onchange = saveOptions;
 $("replaceDim").onchange = saveOptions;
 $("replaceHalfDim").onchange = saveOptions;
+$("useEmbedPlayer").onchange = saveOptions;
 
 // Load the saved options
 document.addEventListener("DOMContentLoaded", () => {
@@ -97,5 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
     $("replaceAug").checked = item.replaceAug ?? false;
     $("replaceDim").checked = item.replaceDim ?? false;
     $("replaceHalfDim").checked = item.replaceHalfDim ?? false;
+    $("useEmbedPlayer").checked = item.useEmbedPlayer ?? false;
   });
 });

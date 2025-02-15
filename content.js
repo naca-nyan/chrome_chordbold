@@ -56,6 +56,7 @@ const options = [
   "replaceAug",
   "replaceDim",
   "replaceHalfDim",
+  "useEmbedPlayer",
 ];
 
 function applyStyleFromStorage() {
@@ -73,6 +74,7 @@ function applyStyleFromStorage() {
     const replaceAug = item.replaceAug ?? false;
     const replaceDim = item.replaceDim ?? false;
     const replaceHalfDim = item.replaceHalfDim ?? false;
+    const useEmbedPlayer = item.useEmbedPlayer ?? false;
 
     const style = styles[chordstyleOption];
     const wordFontWeight = {
@@ -190,6 +192,8 @@ function applyStyleFromStorage() {
         }
       });
     }
+
+    if (useEmbedPlayer) enableEmbedPlayer();
   });
 }
 
@@ -267,3 +271,49 @@ document.addEventListener("fullscreenchange", () => {
   if (!document.fullscreenElement) setFullscreen(false);
 });
 fullscreenBtn.button.onclick = () => setFullscreen(!fullscreen);
+
+function enableEmbedPlayer() {
+  const videoPlayer = {
+    container: document.createElement("div"),
+    player: document.createElement("div"),
+    button: document.createElement("button"),
+    active: false,
+    init() {
+      this.container.style.position = "fixed";
+      this.container.style.zIndex = 2147483647;
+      this.container.style.bottom = "0";
+      this.container.style.right = "0";
+      this.container.style.textAlign = "right";
+      this.button.onclick = () => this.setActive(false);
+      this.button.innerHTML =
+        `<img src="https://material-icons.github.io/material-icons/svg/close/baseline.svg" alt="close" />`;
+      this.player.style.width = "640px";
+      this.player.style.height = "360px";
+      this.container.append(this.button, this.player);
+    },
+    setVideo(videoId) {
+      this.player.innerHTML =
+        `<iframe width="640" height="360" src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+    },
+    setActive(value = true) {
+      this.active = value;
+      if (value) {
+        document.body.append(this.container);
+      } else {
+        this.container.remove();
+      }
+    },
+  };
+  const movieFirst = document.querySelector(".movie a");
+  if (movieFirst?.href.startsWith("https://www.youtube.com")) {
+    const videoId = movieFirst.href.split("?v=").pop();
+    if (videoId) {
+      videoPlayer.init();
+      videoPlayer.setVideo(videoId);
+      movieFirst.onclick = (e) => {
+        e.preventDefault();
+        if (!videoPlayer.active) videoPlayer.setActive(true);
+      };
+    }
+  }
+}
