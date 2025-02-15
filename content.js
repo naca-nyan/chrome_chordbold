@@ -74,7 +74,7 @@ function applyStyleFromStorage() {
     const replaceAug = item.replaceAug ?? false;
     const replaceDim = item.replaceDim ?? false;
     const replaceHalfDim = item.replaceHalfDim ?? false;
-    const useEmbedPlayer = item.useEmbedPlayer ?? false;
+    const useEmbedPlayer = item.useEmbedPlayer ?? true;
 
     const style = styles[chordstyleOption];
     const wordFontWeight = {
