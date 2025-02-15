@@ -100,6 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
     $("replaceAug").checked = item.replaceAug ?? false;
     $("replaceDim").checked = item.replaceDim ?? false;
     $("replaceHalfDim").checked = item.replaceHalfDim ?? false;
-    $("useEmbedPlayer").checked = item.useEmbedPlayer ?? false;
+    $("useEmbedPlayer").checked = item.useEmbedPlayer ?? true;
   });
 });
