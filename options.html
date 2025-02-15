@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>ChordWiki Bold Options</title>
+	<title>ChordWiki Bold 設定</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="options.css">
 </head>
@@ -11,68 +11,68 @@
 		<h2>ChordWiki Bold</h2>
 	</header>
 	<fieldset>
-		<legend>Chord Style</legend>
+		<legend>コード</legend>
 		<div class="toggle-box-wrapper">
 			<input type="checkbox" name="chordstyleOption" value="bold" id="chord-bold" checked/>
-			<label for="chord-bold"><img src="images/chord-bold.png"/>Bold</label>
+			<label for="chord-bold"><img src="images/chord-bold.png"/>太字</label>
 			<input type="checkbox" name="chordstyleOption" value="bold-large" id="chord-bold-large" />
-			<label for="chord-bold-large"><img src="images/chord-boldlarge.png"/>Bold Large</label>
+			<label for="chord-bold-large"><img src="images/chord-boldlarge.png"/>太字(大)</label>
 			<input type="checkbox" name="chordstyleOption" value="bold-verylarge" id="chord-bold-verylarge" />
-			<label for="chord-bold-verylarge"><img src="images/chord-boldverylarge.png"/>Bold Very Large</label>
+			<label for="chord-bold-verylarge"><img src="images/chord-boldverylarge.png"/>太字(巨大)</label>
 		</div>
 		<div class="toggle-box-wrapper">
 			<input type="checkbox" name="chordstyleOption" value="jazz" id="chord-jazz" />
-			<label for="chord-jazz"><img src="images/chord-jazz.png"/>Jazz</label>
+			<label for="chord-jazz"><img src="images/chord-jazz.png"/>丸文字</label>
 			<input type="checkbox" name="chordstyleOption" value="jazz-large" id="chord-jazz-large"/>
-			<label for="chord-jazz-large"><img src="images/chord-jazzlarge.png"/>Jazz Large</label>
+			<label for="chord-jazz-large"><img src="images/chord-jazzlarge.png"/>丸文字(大)</label>
 			<input type="checkbox" name="chordstyleOption" value="jazz-verylarge" id="chord-jazz-verylarge"/>
-			<label for="chord-jazz-verylarge"><img src="images/chord-jazzverylarge.png"/>Jazz Very Large</label>
+			<label for="chord-jazz-verylarge"><img src="images/chord-jazzverylarge.png"/>丸文字(巨大)</label>
 		</div>
 	</fieldset>
 	<fieldset>
-		<legend>Other Style</legend>
+		<legend>その他</legend>
 		<div class="toggle-box-wrapper">
 			<input type="checkbox" id="wordstyleOption" />
-			<label for="wordstyleOption"><img src="images/word-bold.png"/>Word Bold</label>
+			<label for="wordstyleOption"><img src="images/word-bold.png"/>歌詞太字</label>
 			<input type="checkbox" id="compactOption" />
-			<label for="compactOption"><img src="images/compact-compact.png"/>Compact</label>
+			<label for="compactOption"><img src="images/compact-compact.png"/>歌詞を詰め込み</label>
 			<input type="checkbox" id="backgroundColorEnabled" />
 			<label for="backgroundColorEnabled">
 				<img id="background-color-icon" style="background-color: #00ff00;" src="images/word-normal.png">
-				Bg Color
+				クロマキー
 			</label>
 		</div>
 	</fieldset>
 	<fieldset class="flex-column">
-		<legend>Column Count</legend>
+		<legend>段組</legend>
 		<label for="columnCount" id="columnCountText" class="text-center">1</label>
 		<input type="range" id="columnCount" min="1" max="5" step="1" value="1"/>
 	</fieldset>
-	<details><summary><span class="on-close">Advanced</span></summary></details>
+	<details><summary><span class="on-close">詳細設定</span></summary></details>
 	<fieldset class="on-open">
-		<legend>Advanced</legend>
+		<legend>詳細設定</legend>
 		<div class="center">
-		<h4>Chord notation (in Jazz mode)</h4>
+		<h4>コード略記 (丸文字でのみ有効)</h4>
 		<ul class="checkbox-wrapper">
 			<li><input type="checkbox" id="replaceMaj" checked>maj → △</li>
 			<li><input type="checkbox" id="replaceAug">aug → +</li>
 			<li><input type="checkbox" id="replaceDim">dim → ○</li>
 			<li><input type="checkbox" id="replaceHalfDim">m7-5 → Ø</li>
 		</ul>
-		<h4>Spacing (in Compact mode)</h4>
+		<h4>詰め込みの微調整</h4>
 		<ul class="number-wrapper">
 			<li>
-				<span>Line height (px)</span>
+				<span>行間隔 (px)</span>
 				<input type="number" id="compactLineHeight" value="16">
 			</li>
 			<li>
-				<span>Chord margin (px)</span>
+				<span>コードの最低間隔 (px)</span>
 				<input type="number" id="compactChordMargin" value="6">
 			</li>
 		</ul>
-		<h4>Background color</h4>
+		<h4>クロマキー色</h4>
 		<input type="color" id="backgroundColorPicker" value="#00ff00">
-		<h4>Use embedded YouTube player</h4>
+		<h4>画面内でYouTubeを再生</h4>
 		<input type="checkbox" id="useEmbedPlayer">
 	</fieldset>
 	<script src="options.js"></script>
