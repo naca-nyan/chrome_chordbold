@@ -159,7 +159,7 @@ function applyStyleFromStorage() {
         replaceHalfDim && [/m7[-b]5|m7\([-b]5\)/g, "\uE18F"],
         ["b", "\u266D"],
         ["#", "\u266F"],
-        [/(.+)(\(.+?\))/g, "$1<sup>$2</sup>"],
+        [/([^/]+?)(\([^/]+?\))/g, "$1<sup>$2</sup>"],
         [/^([^\(]+)([-+][59]|omit[35])/g, "$1<sup>$2</sup>"],
       ].filter((x) => x !== false);
       document.querySelectorAll("span.chord").forEach((chord) => {
@@ -198,12 +198,47 @@ chrome.storage.onChanged.addListener(() => {
   applyStyleFromStorage();
 });
 
+const fullscreenBtn = {
+  button: document.createElement("button"),
+  img: document.createElement("img"),
+  iconOpen:
+    `https://material-icons.github.io/material-icons/svg/open_in_full/baseline.svg`,
+  iconClose:
+    `https://material-icons.github.io/material-icons/svg/close_fullscreen/baseline.svg`,
+  init() {
+    this.button.style.zIndex = 0;
+    this.button.style.border = "none";
+    this.button.style.padding = "0";
+    this.button.style.width = "33px";
+    this.button.style.height = "33px";
+    this.button.style.borderRadius = "50%";
+    this.button.style.cursor = "pointer";
+    this.setClose(false);
+    this.button.appendChild(this.img);
+    document.querySelector("div.main")?.prepend(this.button);
+  },
+  setClose(value) {
+    if (value) {
+      this.img.src = this.iconClose;
+      this.button.style.position = "fixed";
+      this.button.style.top = "30px";
+      this.button.style.right = "30px";
+    } else {
+      this.img.src = this.iconOpen;
+      this.button.style.position = "absolute";
+      this.button.style.top = null;
+      this.button.style.right = "230px";
+    }
+  },
+};
+fullscreenBtn.init();
+
 let fullscreen = false;
-function toggleFullscreen() {
-  fullscreen = !fullscreen;
+function setFullscreen(value = true) {
+  fullscreen = value;
   const main = document.querySelector("div.main");
   const mainDiv = document.querySelector("div.main div");
-  if (fullscreen) {
+  if (value) {
     const color = window.getComputedStyle(document.body).backgroundColor;
     main.style.display = "flex";
     main.style.flexDirection = "column";
@@ -214,13 +249,21 @@ function toggleFullscreen() {
     mainDiv.style.margin = "0 auto";
     mainDiv.style.maxWidth = "97vw";
     main.requestFullscreen();
+    fullscreenBtn.setClose(true);
   } else {
     main.style = null;
     mainDiv.style = null;
     if (document.fullscreenElement) document.exitFullscreen();
+    fullscreenBtn.setClose(false);
   }
 }
 document.addEventListener("keypress", (e) => {
-  if (e.key === "f") toggleFullscreen();
+  if (e.key === "f") setFullscreen(!fullscreen);
 });
-document.addEventListener("dblclick", toggleFullscreen);
+document.addEventListener("dblclick", () => {
+  setFullscreen(!fullscreen);
+});
+document.addEventListener("fullscreenchange", () => {
+  if (!document.fullscreenElement) setFullscreen(false);
+});
+fullscreenBtn.button.onclick = () => setFullscreen(!fullscreen);
