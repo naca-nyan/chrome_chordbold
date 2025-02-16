@@ -294,9 +294,27 @@ function enableEmbedPlayer() {
       this.player.style.height = "360px";
       this.container.append(this.button, this.player);
     },
-    setVideo(videoId) {
-      this.player.innerHTML =
-        `<iframe width="640" height="360" src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+    setVideo(type, videoId) {
+      switch (type) {
+        case "youtube":
+          this.player.innerHTML =
+            `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1"
+              width="640" height="360" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>`;
+          return;
+        case "niconico":
+          this.player.innerHTML =
+            `<iframe src="https://embed.nicovideo.jp/watch/${videoId}"
+              width="640" height="360" frameborder="0" 
+              scrolling="no"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+              allowfullscreen
+            ></iframe>`;
+          return;
+      }
     },
     setActive(value = true) {
       this.active = value;
@@ -307,16 +325,28 @@ function enableEmbedPlayer() {
       }
     },
   };
-  const movieFirst = document.querySelector(".movie a");
-  if (movieFirst?.href.startsWith("https://www.youtube.com")) {
-    const videoId = movieFirst.href.split("?v=").pop();
-    if (videoId) {
-      videoPlayer.init();
-      videoPlayer.setVideo(videoId);
-      movieFirst.onclick = (e) => {
-        e.preventDefault();
-        if (!videoPlayer.active) videoPlayer.setActive(true);
-      };
+  videoPlayer.init();
+  document.querySelectorAll(".movie a").forEach((movie) => {
+    console.log(movie);
+    if (movie.href.startsWith("https://www.youtube.com")) {
+      const videoId = movie.href.split("?v=").pop();
+      if (videoId) {
+        movie.onclick = (e) => {
+          e.preventDefault();
+          videoPlayer.setVideo("youtube", videoId);
+          if (!videoPlayer.active) videoPlayer.setActive(true);
+        };
+      }
     }
-  }
+    if (movie.href.startsWith("https://www.nicovideo.jp")) {
+      const videoId = movie.href.split("/").pop();
+      if (videoId) {
+        movie.onclick = (e) => {
+          e.preventDefault();
+          videoPlayer.setVideo("niconico", videoId);
+          if (!videoPlayer.active) videoPlayer.setActive(true);
+        };
+      }
+    }
+  });
 }
