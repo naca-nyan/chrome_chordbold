@@ -155,6 +155,8 @@ function applyStyleFromStorage() {
 
     if (chordstyleOption.startsWith("jazz")) {
       const replaceEntries = [
+        ["（", "("],
+        ["）", ")"],
         replaceAug && [/aug/g, "\uE186"],
         replaceDim && [/dim/g, "\uE187"],
         replaceMaj && [/Maj|maj|M/g, "\uE18A"],
