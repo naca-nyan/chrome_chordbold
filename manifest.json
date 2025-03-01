@@ -7,7 +7,7 @@
   "content_scripts": [{
     "matches": [
       "https://ja.chordwiki.org/wiki/*",
-      "https://ja.chordwiki.org/wiki.cgi*"
+      "https://ja.chordwiki.org/wiki.cgi?c=view*"
     ],
     "js": ["content.js"],
     "run_at": "document_end"

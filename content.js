@@ -264,12 +264,6 @@ function setFullscreen(value = true) {
     fullscreenBtn.setClose(false);
   }
 }
-document.addEventListener("keypress", (e) => {
-  if (e.key === "f") setFullscreen(!fullscreen);
-});
-document.addEventListener("dblclick", () => {
-  setFullscreen(!fullscreen);
-});
 document.addEventListener("fullscreenchange", () => {
   if (!document.fullscreenElement) setFullscreen(false);
 });
