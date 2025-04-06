@@ -244,7 +244,7 @@ let fullscreen = false;
 function setFullscreen(value = true) {
   fullscreen = value;
   const main = document.querySelector("div.main");
-  const mainDiv = document.querySelector("div.main div");
+  const mainDivs = document.querySelectorAll("div.main div");
   if (value) {
     const color = window.getComputedStyle(document.body).backgroundColor;
     main.style.display = "flex";
@@ -253,13 +253,17 @@ function setFullscreen(value = true) {
     main.style.backgroundColor = color;
     main.style.paddingBottom = "20px";
     main.style.overflow = "auto";
-    mainDiv.style.margin = "0 auto";
-    mainDiv.style.maxWidth = "97vw";
+    for (const mainDiv of mainDivs) {
+      mainDiv.style.margin = "0 auto";
+      mainDiv.style.maxWidth = "97vw";
+    }
     main.requestFullscreen();
     fullscreenBtn.setClose(true);
   } else {
     main.style = null;
-    mainDiv.style = null;
+    for (const mainDiv of mainDivs) {
+      mainDiv.style = null;
+    }
     if (document.fullscreenElement) document.exitFullscreen();
     fullscreenBtn.setClose(false);
   }
@@ -343,3 +347,48 @@ function enableEmbedPlayer() {
     }
   });
 }
+
+function nodesAfter(el, root) {
+  let after = false;
+  const targets = [];
+  for (const child of root.children) {
+    if (child === el) after = true;
+    if (after) targets.push(child);
+  }
+  return targets;
+}
+
+function moveToNewDivAfter(line) {
+  const parent = line.parentNode;
+  const div = document.createElement("div");
+  for (const target of nodesAfter(line, parent)) {
+    div.appendChild(target);
+  }
+  parent.after(div);
+  const hr = document.createElement("hr");
+  hr.style.margin = "40px 0";
+  parent.after(hr);
+}
+
+document.querySelectorAll(".main .line.comment").forEach((line) => {
+  const button = document.createElement("button");
+  button.innerText = "↵";
+  button.title = "この行から段組みを折り返す";
+  button.style.border = "none";
+  button.style.padding = "0";
+  button.style.width = "20px";
+  button.style.lineHeight = "inherit";
+  button.style.borderRadius = "50%";
+  button.style.cursor = "pointer";
+  button.style.display = "none";
+  button.onclick = () => {
+    moveToNewDivAfter(line);
+  };
+  line.onmouseover = () => {
+    button.style.display = "inline";
+  };
+  line.onmouseout = () => {
+    button.style.display = "none";
+  };
+  line.appendChild(button);
+});
