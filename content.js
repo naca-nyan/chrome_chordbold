@@ -135,6 +135,9 @@ function applyStyleFromStorage() {
           display: inline-flex;
           flex-direction: column;
         }
+        div.main span.chordword, div.main span.wordtop {
+          margin-right: 5px;
+        }
         div.main span.chord, div.main span.word, div.main span.wordtop {
           position: static;
           line-height: ${compactLineHeight}px;
