@@ -321,7 +321,6 @@ function enableEmbedPlayer() {
   };
   videoPlayer.init();
   document.querySelectorAll(".movie a").forEach((movie) => {
-    console.log(movie);
     if (movie.href.startsWith("https://www.youtube.com")) {
       const videoId = movie.href.split("?v=").pop();
       if (videoId) {
