@@ -109,10 +109,10 @@ function applyStyleFromStorage() {
     if (compactOption) {
       // Wrap every `span.chord` and `span.word` pair with `span.chordword`
       document.querySelectorAll(".main .line").forEach((line) => {
-        const p = document.createElement("p");
-        while (line.children.length > 0) {
-          const chord = line.children[0];
-          const word = line.children[1];
+        const nodes = [...line.children];
+        for (let i = 0; i < nodes.length; i++) {
+          const chord = nodes[i];
+          const word = nodes[i + 1];
           if (
             chord.classList.contains("chord") &&
             word &&
@@ -120,14 +120,11 @@ function applyStyleFromStorage() {
           ) {
             const span = document.createElement("span");
             span.classList = "chordword";
+            chord.after(span);
             span.appendChild(chord);
             span.appendChild(word);
-            p.appendChild(span);
-          } else {
-            p.appendChild(chord);
           }
         }
-        line.innerHTML = p.innerHTML;
       });
       const styleSheet = new CSSStyleSheet();
       styleSheet.replaceSync(`
