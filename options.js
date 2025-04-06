@@ -20,7 +20,7 @@ function setRadioBehavior(name, onchange) {
       for (const other of elems) {
         if (elem != other) other.checked = false;
       }
-      onchange();
+      onchange(elem);
     };
   });
 }
@@ -62,9 +62,16 @@ function saveOptions() {
   });
 }
 
-setRadioBehavior("chordstyleOption", saveOptions);
+setRadioBehavior("chordstyleOption", (elem) => {
+  const enabled = elem?.checked && elem?.value.startsWith("jazz");
+  enableReplaceOptions(enabled);
+  saveOptions();
+});
 $("wordstyleOption").onchange = saveOptions;
-$("compactOption").onchange = saveOptions;
+$("compactOption").onchange = (e) => {
+  enableCompactOptions(e.target.checked);
+  saveOptions();
+};
 $("compactLineHeight").oninput = saveOptions;
 $("compactChordMargin").oninput = saveOptions;
 $("backgroundColorEnabled").onchange = saveOptions;
@@ -86,8 +93,10 @@ $("useEmbedPlayer").onchange = saveOptions;
 document.addEventListener("DOMContentLoaded", () => {
   chrome.storage.sync.get(options, (item) => {
     setRadioValue("chordstyleOption", item.chordstyleOption ?? "bold");
+    enableReplaceOptions(item.chordstyleOption.startsWith("jazz"));
     $("wordstyleOption").checked = item.wordstyleOption == "bold";
     $("compactOption").checked = item.compactOption;
+    enableCompactOptions(item.compactOption);
     $("compactLineHeight").value = item.compactLineHeight ?? "16";
     $("compactChordMargin").value = item.compactChordMargin ?? "6";
     $("backgroundColorEnabled").checked = item.backgroundColorEnabled;
@@ -103,3 +112,15 @@ document.addEventListener("DOMContentLoaded", () => {
     $("useEmbedPlayer").checked = item.useEmbedPlayer ?? true;
   });
 });
+
+function enableReplaceOptions(enabled) {
+  $("replaceMaj").disabled = !enabled;
+  $("replaceAug").disabled = !enabled;
+  $("replaceDim").disabled = !enabled;
+  $("replaceHalfDim").disabled = !enabled;
+}
+
+function enableCompactOptions(enabled) {
+  $("compactLineHeight").disabled = !enabled;
+  $("compactChordMargin").disabled = !enabled;
+}
